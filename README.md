@@ -1,10 +1,22 @@
 # Title
-About me page and portfolio
+Weather Dashboard
 
 # About
-Developed with the skills I learnt at the bootcamp by the end of first week of coding boot camp experience at Columbia University, NY. Date of publication: 9/28/2020.
+Developed with the skills I learnt at the bootcamp during the third week of coding boot camp experience at Columbia University, NY. Date of publication: 10/14/2020.
 
-This website is designed exclusively using the CSS bootstrap and incorporates responsive design attributes. 
+This website is designed using CSS bootstrap and incorporates responsive design attributes. The Weather dashboard is designed using a Weather API (Application Processing Interface) from https://openweathermap.org/api
+
+
+
+# References: 
+
+An application programming interface (API) is a computing interface which defines interactions between multiple software intermediaries. Through information hiding, APIs enable modular programming, which allows users to use the interface independently of the implementation. For further details, please refer to the following link
+ https://www.computerworld.com/article/2593623/application-programming-interface.html
+
+
+jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript. For further details, please refer to their official website:
+https://jquery.com/
+
 
 Bootstrap is a free and open-source CSS framework directed at responsive, mobile-first front-end web development. It contains CSS- and JavaScript-based design templates for typography, forms, buttons, navigation, and other interface components. If you are interested in learning more about Bootstrap, please visit their official page: https://getbootstrap.com/
 
@@ -33,13 +45,19 @@ HTML
 CSS
 Bootstrap
 Font Awesome
+JQuery
+Java Script
 Human Imagination
 Creative Thinking
 
 # Note to user
-The code shared in this repository demonstrates how you can creat dynamic websites while integrating responsive design features that are compatible across a broad spectrum of devices and web-browsers. Notice that Bootstrap is essentially a compilation of CSS code that simplifies the styling of websites using pre-packged code in the form of CSS classes improving efficiency. For example, the design of navigation bar, footer and forms using bootstrp classes leads to consistency in web-design without compromsing customisability and while maintaining flexibility across a variety of devices ranging from desktop to a smartphone with a small screen. The CSS files containing the code for classes are located at the local CDN (content delivery network) and can be linked into HTML. 
+The code shared in this repository demonstrates how you can dynamically update weather related information on your webside using an API. Notice how JQuery or javascript can be used to dynamically update the contents of webpage.
 
 # Acquired skills:
+
+* Utilizing an open source web API to dynamically update the contents of the website
+
+* Manipulating innerHTML using JQuery and Java Script
 
 * Utilizing  CSS resets for ensuring cross-browser compatibility
 
