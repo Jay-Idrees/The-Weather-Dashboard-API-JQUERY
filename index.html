@@ -11,7 +11,7 @@
     <link href="style.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/14995c0b3b.js" crossorigin="anonymous"></script>
 
-    <title>Jay Idrees</title>
+    <title>Weather Dashboard</title>
 
   </head>
 
@@ -24,7 +24,10 @@
 
 </head>
 
-<body>
+<body style='margin:auto;'>
+
+<!-- Navbar starts here -->
+   
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -40,27 +43,191 @@
     </div>
   </nav>
 
+<!-- Navbar Ends -->
+
+<!-- Container starts starts -->
 
      <div class="container-fluid my-lg-0">
+  <!--Main Row starts -->
       <div class="row">
-        <div class="col-sm-3 bg-light">
+        <!-- Left column starts -->
+        <div class="col-sm-3 bg-light" style=" padding-top: 10px;">
           
-          <p>Search for a city</p>
+          <div class="blockquote"><p>Search for a city</p></div>
 
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn my-2 my-sm-0" type="submit">Search</button>
+            <button type="button" class="btn btn-primary"> <i class="fas fa-search"></i></button>
           </form>
           
         </div>
-        <div class="col-sm-9">col-sm-8</div>
+       <!-- Left column ends -->
+      <!-- Right column starts -->
+
+        <div class="col-sm-9">
+          <div class="jumbotron mt-3 text-dark bg-white border">
+            <h1>City (Date) <i class="fas fa-cloud-showers-heavy"></i></h1> <br>
+            <p class="blockquote">Temperature</p> 
+            <p class="blockquote">Humidity</p> 
+            <p class="blockquote">Wind Speed</p> 
+            <p class="blockquote">UV Index</p> 
+          </div>
+
+          <div>
+            <h2> 5-Day Forcast:</h2>
+          </div>
+          <!-- Jumbotron Ends, but Nested widgets start -->
+
+          <!-- Nested row starts- Note that we are still inside col-sm-9 Div -->
+         
+
+               <div class="row">
+
+               
+
+                <!-- Widget 1 -->
+
+                          <div class="col">
+                          
+
+                            <div class="card text-white bg-primary text-center" >
+                              <div class="card-body">
+                                  <h5 class="card-title"> Date </h5> <br>
+                                  <i class="fas fa-3x fa-sun"></i> <br> <br>
+                                  <p class="card-text">Temp:</p>
+                                 
+                              </div>
+                              <div class="card-footer">
+                                  <small class=" text-white">Humidity:</small>
+                              </div>
+                           </div> 
+                          <!-- Card div ends -->
+
+
+
+                          </div>
+
+               <!-- Widget 1 Ends -->
+                    <!-- ========================= -->
+              <!-- Widget 2 Starts -->
+
+                           <div class="col">
+
+                            <div class="card text-white bg-primary text-center" >
+                              <div class="card-body">
+                                  <h5 class="card-title"> Date </h5> <br>
+                                  <i class="fas fa-3x fa-sun"></i> <br> <br>
+                                  <p class="card-text">Temp:</p>
+                                
+                              </div>
+                              <div class="card-footer">
+                                  <small class=" text-white">Humidity:</small>
+                              </div>
+                           </div> 
+                          <!-- Card div ends -->
+
+                           </div>
+
+               <!-- Widget 2 Ends  -->
+                       <!-- ========================= -->
+               <!-- Widget 3 Starts -->
+
+                             <div class="col">
+
+
+                              <div class="card text-white bg-primary text-center" >
+                                <div class="card-body">
+                                    <h5 class="card-title"> Date </h5> <br>
+                                    <i class="fas fa-3x fa-sun"></i> <br> <br>
+                                    <p class="card-text">Temp:</p>
+                                 
+                                </div>
+                                <div class="card-footer">
+                                    <small class=" text-white">Humidity:</small>
+                                </div>
+                             </div> 
+                            <!-- Card div ends -->
+   
+   
+   
+                              </div>
+   
+                  <!-- Widget 3 Ends  -->
+                          <!-- ========================= -->
+                  <!-- Widget 4 Starts -->
+
+                             <div class="col">
+
+
+                              <div class="card text-white bg-primary text-center" >
+                                <div class="card-body">
+                                    <h5 class="card-title"> Date </h5> <br>
+                                    <i class="fas fa-3x fa-sun"></i> <br> <br>
+                                    <p class="card-text">Temp:</p>
+                                  
+                                </div>
+                                <div class="card-footer">
+                                    <small class=" text-white">Humidity:</small>
+                                </div>
+                             </div> 
+                            <!-- Card div ends -->
+   
+   
+   
+                              </div>
+   
+                  <!-- Widget 4 Ends  -->
+                          <!-- ========================= -->
+                  <!-- Widget 5 Starts -->
+
+                             <div class="col">
+
+
+                              <div class="card text-white bg-primary text-center" >
+                                <div class="card-body">
+                                    <h5 class="card-title"> Date </h5> <br>
+                                    <i class="fas fa-3x fa-sun"></i> <br> <br>
+                                    <p class="card-text">Temp:</p>
+                                   
+                                </div>
+                                <div class="card-footer">
+                                    <small class=" text-white">Humidity:</small>
+                                </div>
+                             </div> 
+                            <!-- Card div ends -->
+           
+           
+           
+                             </div>
+           
+                   <!-- Widget 5 Ends  -->
+                           <!-- ========================= -->
+                             
+                          
+               
+                          
+
+
+
+
+
+
+        </div>
+
+        
+
+
+
+        </div>
+
+
+
+        <!-- Left column ends -->
       </div>
 
 
-
-
 </body>
-</div>
+
 <script>
 
 </script>
@@ -69,24 +236,13 @@
 
 
 
-<div class="footer-primary" style="position: absolute; bottom: 0; width: 100%; ">
+<!-- <div class="footer-primary" style="position: absolute; bottom: 0;  width: 100%; ">
 
   <footer class="card-footer text-center bg-transperant footer-font-style text-muted footer-position">
     <p  > Copyright 2020. Jay Idrees
     </p>
   </footer>
-</div>
-
-
-
-
-
-
-
-
-
-
-
+</div> -->
 
 
 
