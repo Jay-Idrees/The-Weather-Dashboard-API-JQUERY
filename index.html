@@ -59,8 +59,21 @@
           <div class="blockquote"><p>Search for a city</p></div>
 
           <form class="form-inline my-2 my-lg-0">
-            <input id='user_city_text' class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button id='user_city_bt' type="button" class="btn btn-primary"> <i class="fas fa-search"></i></button>
+
+            <input id='user_city_text' class="form-control mr-sm-2" 
+            
+            type="search" placeholder="Search" aria-label="Search">
+
+
+
+            <button id='user_citysearch_bt' type="button" class="btn btn-primary"> 
+              
+              <i class="fas fa-search"></i></button>
+
+
+              <div class='search-hx'></div>
+
+
           </form>
           
         </div>
@@ -69,7 +82,7 @@
 
         <div class="col-sm-9">
           <div class="jumbotron mt-3 text-dark bg-white border">
-            <h1>City (Date) <i class="fas fa-cloud-showers-heavy"></i></h1> <br>
+            <h1 id='city_jumbo'>City (Date) <i class="fas fa-cloud-showers-heavy"></i></h1> <br>
             <p class="blockquote">Temperature</p> 
             <p class="blockquote">Humidity</p> 
             <p class="blockquote">Wind Speed</p> 
@@ -239,13 +252,13 @@
 
 
 
-<!-- <div class="footer-primary" style="position: absolute; bottom: 0;  width: 100%; ">
+ <div class="footer-primary" style=" bottom: 0; margin-top: 50px; padding-bottom: 0px; margin-bottom: 0; width: 100%; margin-left: 0; padding-left: 0; margin-right: 0; padding-right: 0;">
 
   <footer class="card-footer text-center bg-transperant footer-font-style text-muted footer-position">
     <p  > Copyright 2020. Jay Idrees
     </p>
   </footer>
-</div> -->
+</div> 
 
 
 
