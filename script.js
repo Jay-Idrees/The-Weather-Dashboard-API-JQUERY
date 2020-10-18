@@ -23,14 +23,59 @@ function get_weather(){
  .then(response => response.json())
  .then(data => {
    console.log(data);
+
+// Today's date - I prefer this method because I like . more than - or / in dates and I like to spell out the day compltely
+
+   // Getting the full name for a Day
+   var weekday=new Array(7);
+   weekday[0]="Sunday";
+   weekday[1]="Monday";
+   weekday[2]="Tuesday";
+   weekday[3]="Wednesday";
+   weekday[4]="Thursday";
+   weekday[5]="Friday";
+   weekday[6]="Saturday";
+   
+   var d = new Date();
+   var day = weekday[d.getDay()];
+   console.log(day)
+
+
+var date_raw = new Date();
+var dd = date_raw.getDate(); //yields day
+var MM = date_raw.getMonth(); //yields month
+var yyyy = date_raw.getFullYear(); //yields year
+var date_now=(MM+1)+". "+dd+". "+yyyy;
+var day_date='Today is '+day+', '+date_now;
+
+console.log(date_now, date_raw, day_date)
+
+    //  // Alternative 2- Today's date
+    //  var date2 = (new Date()).toISOString().split('T')[0];
+    //  console.log(date2)
+
+    //  // Alternative 3- Today's date-
+    //  var date3=("(" + Date() + ")");
+    //  console.log('date3', date3)
+
    // Creating variables for the current temp (F), humidity, wind speed 
 
   var city_current=data.name
   var country_current=data.sys.country
   var temp_current= Math.floor((data.main.temp - 273.15) * 1.80 + 32);
+  // var celcius = Math.round(parseFloat(data.main.temp)-273.15);
   var humidity_current=data.main.humidity
   var wind_current=data.wind.speed
   console.log(temp_current, humidity_current, wind_current, city_current)
+
+  // Obtain weather depiction icon
+  var icon_current = $(
+    "<img src='http://openweathermap.org/img/wn/" +
+      data.weather[0].icon +
+      ".png' style='margin-left:10px;'/>"
+  );
+
+  console.log(icon_current)
 
 
   // Display current city data in jumbotron
@@ -44,33 +89,30 @@ function get_weather(){
 
     $('#jumbotron').append(h1_city_current)
 
-    // Dynamically updating temperature into the Jumbotron (adding attr and appending)
-    var p_temp_current=$("<p id='p_temp_current'> Temperaure: " + temp_current + " ° F </p> <br>");
+    // Current day and date-Jumbotron
+
+    
+    var p_dayDate_current=$("<p id='day_date_current'>"+day_date+" </p> ");
+   p_dayDate_current.attr("class", "blockquote text-primary font-italic ")
+    $("#jumbotron").append(p_dayDate_current, icon_current);
+
+    // Current temperature-Jumbotron
+
+    var p_temp_current=$("<p id='p_temp_current'> Temperature: " + temp_current + " ° F </p> ");
     p_temp_current.attr("class", "blockquote")
     $("#jumbotron").append(p_temp_current);
 
+    // Current humidity
+    var p_humidity_current=$("<p id='p_humidity_current'> Humidity: " + humidity_current + " % </p> ");
+    p_humidity_current.attr("class", "blockquote")
+    $("#jumbotron").append(p_humidity_current);
 
+     // Current Wind speed
+     var p_wind_current=$("<p id='p_wind_current'> Wind Speed: " + wind_current + " m/s </p> ");
+     p_wind_current.attr("class", "blockquote")
+     $("#jumbotron").append(p_wind_current);
   
 
-
-
-  
-    // var button = $("<button class='optionButton button is-dark'>")
-    // // add a data-answer attribute
-    // button.attr("data-answer", option)
-    // button.attr("data-answerKey", answerKey)
-    // // add some text
-    // button.text(option)
-    // // put the button in the buttons div
-    // $("#question-container .buttons").append(button)
-
-
-
-  //  let temp = data.main.temp;
-  //  temperature.innerHTML = temp + "° F";
-  //  location.innerHTML =
-  //    data.name + " (" + latitude + "°, " + longitude + "°)";
-  //  description.innerHTML = data.weather[0].main;
  }); // br-close for the fetch function
 
 
@@ -88,8 +130,6 @@ function get_weather(){
 //////////////////// Ajax inside the get_weather function ends /////////////
 
 
-
-
   }; // br-cl for success function
 
 
@@ -97,13 +137,8 @@ function get_weather(){
                   $('#city_jumbo').text('Unable to retrieve location')
                 }
 
-
-
-
-
 }; // br-cl for the outer most function
     
-
     get_weather()
 
 
