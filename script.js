@@ -23,11 +23,48 @@ function get_weather(){
  .then(response => response.json())
  .then(data => {
    console.log(data);
-  var temp_now=data.main.temp
-  var humidity_now=data.main.humidity
-  var wind_now=data.wind.speed
-  var city_now=data.name
-  console.log(temp_now, humidity_now, wind_now, city_now)
+   // Creating variables for the current temp (F), humidity, wind speed 
+
+  var city_current=data.name
+  var country_current=data.sys.country
+  var temp_current= Math.floor((data.main.temp - 273.15) * 1.80 + 32);
+  var humidity_current=data.main.humidity
+  var wind_current=data.wind.speed
+  console.log(temp_current, humidity_current, wind_current, city_current)
+
+
+  // Display current city data in jumbotron
+  // Clearing any pre-existing data
+    $('#jumbotron').empty();
+
+// Display city into the Jumbotron
+          
+    var h1_city_current=$(" <h1 id='h1_city_current'>" + city_current + ", "+
+    country_current + " </h1> <br> ")
+
+    $('#jumbotron').append(h1_city_current)
+
+    // Dynamically updating temperature into the Jumbotron (adding attr and appending)
+    var p_temp_current=$("<p id='p_temp_current'> Temperaure: " + temp_current + " ° F </p> <br>");
+    p_temp_current.attr("class", "blockquote")
+    $("#jumbotron").append(p_temp_current);
+
+
+  
+
+
+
+  
+    // var button = $("<button class='optionButton button is-dark'>")
+    // // add a data-answer attribute
+    // button.attr("data-answer", option)
+    // button.attr("data-answerKey", answerKey)
+    // // add some text
+    // button.text(option)
+    // // put the button in the buttons div
+    // $("#question-container .buttons").append(button)
+
+
 
   //  let temp = data.main.temp;
   //  temperature.innerHTML = temp + "° F";
