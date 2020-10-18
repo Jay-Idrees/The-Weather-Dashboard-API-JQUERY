@@ -3,8 +3,6 @@
 
 function get_weather(){
 
-
-
   var api_key='b5f46b5084bc390631225358108604d4';
 
   var query_url='https://api.openweathermap.org/data/2.5/weather?id=524901&appid=' + api_key;
@@ -25,12 +23,18 @@ function get_weather(){
  .then(response => response.json())
  .then(data => {
    console.log(data);
+  var temp_now=data.main.temp
+  var humidity_now=data.main.humidity
+  var wind_now=data.wind.speed
+  var city_now=data.name
+  console.log(temp_now, humidity_now, wind_now, city_now)
+
   //  let temp = data.main.temp;
   //  temperature.innerHTML = temp + "° F";
   //  location.innerHTML =
   //    data.name + " (" + latitude + "°, " + longitude + "°)";
   //  description.innerHTML = data.weather[0].main;
- });
+ }); // br-close for the fetch function
 
 
 ////////////////// Ajax inside the get_weather function starts ////////////
@@ -40,11 +44,16 @@ function get_weather(){
   //   method: "GET"
   // }).then(function(response) {
   //    console.log(response)
+  //   //  $("#city_jumbo").text(JSON.stringify(response));
+
   // });
 
 //////////////////// Ajax inside the get_weather function ends /////////////
 
-  } // cl-br for success function
+
+
+
+  }; // br-cl for success function
 
 
                 function error(){
@@ -55,7 +64,7 @@ function get_weather(){
 
 
 
-}; // cl-br for the outer most function
+}; // br-cl for the outer most function
     
 
     get_weather()
