@@ -278,50 +278,42 @@ function get_weather(){
        console.log(' USER CITY temp humidity wind city:', city_user,country_usercity, temp_usercity,  humidity_usercity, wind_usercity, icon_usercity, )
       
 
-// Placing the usersearch driven city data into jumbodron
+   // Usersearch driven city data into jumbodron
 
-$('#jumbotron').empty();
+                      $('#jumbotron').empty();
 
-// Display city into the Jumbotron
-          
-    var h1_city_user=$(" <h1 id='h1_city_current'>" + user_city_text + ", "+
-    country_usercity + " </h1> <br> ")
+                      // Display city into the Jumbotron
+                                
+                          var h1_city_user=$(" <h1 id='h1_city_current'>" + user_city_text + ", "+
+                          country_usercity + " </h1> <br> ")
 
-    $('#jumbotron').append(h1_city_user)
+                          $('#jumbotron').append(h1_city_user)
 
-    // Current day and date-Jumbotron
+   // Current day and date-Jumbotron when user clicks the city search button
 
-  //   var p_dayDate_current=$("<p id='day_date_current'>"+day_date+" </p> ").append(icon_current);
+                          var p_dayDate_current=$("<p id='day_date_current'>"+day_date+" </p> ").append(icon_usercity);
 
-  //  p_dayDate_current.attr("class", "blockquote text-primary font-italic ")
-   
-  //   $("#jumbotron").append(p_dayDate_current);
+                        p_dayDate_current.attr("class", "blockquote text-primary font-italic ")
+                        
+                          $("#jumbotron").append(p_dayDate_current);
 
  
 
-  //   // Current temperature-Jumbotron
+    // UserSearch driven temperature-Jumbotron
 
-  //   var p_temp_current=$("<p id='p_temp_current'> Temperature: " + temp_current + " ° F </p> ");
-  //   p_temp_current.attr("class", "blockquote")
-  //   $("#jumbotron").append(p_temp_current);
+                          var p_temp_usercity=$("<p id='p_temp_current'> Temperature: " + temp_usercity + " ° F </p> ");
+                          p_temp_usercity.attr("class", "blockquote")
+                          $("#jumbotron").append(p_temp_usercity);
 
-  //   // Current humidity
-  //   var p_humidity_current=$("<p id='p_humidity_current'> Humidity: " + humidity_current + " % </p> ");
-  //   p_humidity_current.attr("class", "blockquote")
-  //   $("#jumbotron").append(p_humidity_current);
+                          // UserSrearch driven humidity
+                          var p_humidity_usercity=$("<p id='p_humidity_current'> Humidity: " + humidity_usercity + " % </p> ");
+                          p_humidity_usercity.attr("class", "blockquote")
+                          $("#jumbotron").append(p_humidity_usercity);
 
-  //    // Current Wind speed
-  //    var p_wind_current=$("<p id='p_wind_current'> Wind Speed: " + wind_current + " m/s </p> ");
-  //    p_wind_current.attr("class", "blockquote")
-  //    $("#jumbotron").append(p_wind_current);
-
-  //    console.log(city_current)
-
-
-
-
-
-
+                          // UserSearch driven Wind speed
+                          var p_wind_usercity=$("<p id='p_wind_current'> Wind Speed: " + wind_usercity + " m/s </p> ");
+                          p_wind_usercity.attr("class", "blockquote")
+                          $("#jumbotron").append(p_wind_usercity);
 
 
     
@@ -342,8 +334,16 @@ $('#jumbotron').empty();
         }).then(function (response) {
           console.log('UV RESPONSE',response);
           // console.log(response.value);
-          var UV = response.value;
+          var uv = response.value;
        
+
+   // UserSearch driven Wind speed- Note that I did not want to use ($'#jumbotron).empty
+          var p_uv=$("<p id='p_wind_current'> UV Index: " + uv + " units </p> ");
+          p_uv.attr("class", "blockquote")
+          $("#jumbotron").append(p_uv);
+
+
+
  
         }); //br-close ajax for UV- Note that the UV is inside the ajax br for city as its dependent on the response from initial city request
 
@@ -369,6 +369,7 @@ $('#jumbotron').empty();
           console.log('5 day forcast',response);
         }); // br-cl for ajax request
 
+        
 
 
 
