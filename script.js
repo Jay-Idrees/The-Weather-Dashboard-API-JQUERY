@@ -158,11 +158,74 @@ $.ajax({
 
     // current UV
     $("#jumbotron").append(p_uv_current);
+
+
     
 
-  }); //br-close ajax for UV- Note that the UV Ajax is inside the fetch function as well as the success function as it relies on the the longitudinal and lattitudinal variables, secondaly I want the UV to append below the wind speed
+
+// Obtaining the 5 day current city forcast and displaying the data ====
+   //API URL
+   console.log(city_current)
+
+   var fiveDayForcastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city_current}&units=imperial&cnt=5&appid=${api_key}`;
+      
+  
+   //ajax request
+   $.ajax({
+     url: fiveDayForcastURL,
+     method: "GET",
+   }).then(function (response) {
+     console.log('5 day forcast',response);
+
+
+     for (let i=0;i<5;i++) {
+ 
+       // Cleaning jumbotrone before dumping new data
+    $("#day"+i).empty();
+
+    //Dumping date into the widget
+    var date_5d_current=$('<p>').text((MM+1)+". "+(dd+i)+". "+yyyy);
+     
+    $('#day'+i).append(date_5d_current).addClass('font-weight-bold');
+
+    //Dumping icon into 5d forcast widget
+
+     var icon_5d_current=$("<img src='http://openweathermap.org/img/wn/" +
+       response.list[i].weather[0].icon +
+         ".png' style='margin-left:20px;'/>");  
+
+       $('#day'+i).append(icon_5d_current);
+
+
+       // Dumping Temperature into 5d forcast widget
+       var temp_5d_current=$('<p>' ).text('Temp: '+response.list[i].main.temp+ " °F")
+       $('#day'+i).append(temp_5d_current);
+
+       // Dumping humiditiy in the footer of the card- take not of the change in id
+       $("#hum"+i).empty();
+       var humidity_5d_current=response.list[i].main.humidity+' %'
+       $('#hum'+i).append(humidity_5d_current)
+     
+     }
+
+   }); // br-cl for ajax request for 5d weather forcast
+
+
+//______________________________________________Note that if the 5 day forcast is outside the br-close ajx for the UV, it does not work as the current_city variable becomes unavailable
+
+
+
+    
+
+  }); //br-close ajax for UV- Note that the UV Ajax is inside the fetch function as well as the success function as it relies on the the longitudinal and lattitudinal variables, secondaly I want the UV to append below the wind speed, note that the APIKey was changed to api_key
+
+  
+
+
 
  }); // br-close for the fetch function
+
+
 
   }; // br-cl for success function
 
