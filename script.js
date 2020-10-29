@@ -72,6 +72,23 @@ function get_weather(){
 
 
    // Obtaining the UV intensity metric- to be filled
+ //finding UV index
+ uvURL =
+ "https://api.openweathermap.org/data/2.5/uvi?lat=" +
+ latitude +"&lon=" +longitude +"&appid=" + api_key;
+
+$.ajax({
+ url: uvURL,
+ method: "GET",
+}).then(function (response) {
+ console.log('UV RESPONSE',response);
+ // console.log(response.value);
+ var uv_current = response.value;
+
+
+// UserSearch driven Wind speed- Note that I did not want to use ($'#jumbotron).empty
+ var p_uv_current=$("<p> UV Index: " + uv_current + " units </p> ");
+ p_uv_current.attr("class", "blockquote")
 
 
 
@@ -139,10 +156,11 @@ function get_weather(){
 
      console.log(city_current)
 
-
+    // current UV
+    $("#jumbotron").append(p_uv_current);
     
 
-
+  }); //br-close ajax for UV- Note that the UV Ajax is inside the fetch function as well as the success function as it relies on the the longitudinal and lattitudinal variables, secondaly I want the UV to append below the wind speed
 
  }); // br-close for the fetch function
 
@@ -345,7 +363,7 @@ function get_weather(){
 
 
  
-        }); //br-close ajax for UV- Note that the UV is inside the ajax br for city as its dependent on the response from initial city request
+        }); //br-close ajax for UV- Note that the UV Ajax is inside the ajax br for city as its dependent on the response from initial city request
 
 
 
@@ -367,6 +385,37 @@ function get_weather(){
           method: "GET",
         }).then(function (response) {
           console.log('5 day forcast',response);
+
+
+          for (let i=0;i<5;i++) {
+      
+            // Cleaning jumbotrone before dumping new data
+         $("#day"+i).empty();
+
+         //Dumping date into the widget
+         var date_5d=$('<p>').text((MM+1)+". "+(dd+i)+". "+yyyy);
+          
+         $('#day'+i).append(date_5d).addClass('font-weight-bold');
+
+         //Dumping icon into 5d forcast
+
+          var icon_5d=$("<img src='http://openweathermap.org/img/wn/" +
+            response.list[i].weather[0].icon +
+              ".png' style='margin-left:20px;'/>");  
+
+            $('#day'+i).append(icon_5d);
+
+
+            // Dumping Temperature into 5d forcast
+            var temp_5d=$('<p>' ).text('Temp: '+response.list[i].main.temp+ " °F")
+            $('#day'+i).append(temp_5d);
+
+            // Dumping humiditiy in the footer of the card- take not of the change in id
+            var humidity_5d=response.list[i].main.humidity+' %'
+            $('#hum'+i).append(humidity_5d)
+          
+          }
+
         }); // br-cl for ajax request
 
         
@@ -374,8 +423,20 @@ function get_weather(){
 
 
 
-    } //outer render weather function
+    } //outer search_city_weather function
 
+
+
+
+
+
+
+    
+    
+
+      
+
+      
 
 
 //JUST AJAX FOR 5 day function
