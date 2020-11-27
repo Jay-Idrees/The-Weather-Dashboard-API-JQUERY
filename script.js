@@ -1,9 +1,12 @@
 
 
+//?Ben Is there a way around not haveing the prompt for
+// How to get rid of extra space around the footer/ margin
+// Suggestions regarding more accurate moble responsive design 
 
 
 
-
+   var cityList=[]
 
 // Creating global variables for the DATE
 
@@ -45,7 +48,7 @@ console.log(date_now, date_raw, day_date)
 
 // Getting weather information based on user location ( includes, city, UV and 5 day forcast)
 
-get_weather()
+get_weather() // By user location
 
 function get_weather(){
 
@@ -86,13 +89,9 @@ $.ajax({
  var uv_current = response.value;
 
 
-// UserSearch driven Wind speed- Note that I did not want to use ($'#jumbotron).empty
+// UserSearch driven Wind speed- Note that I did not want to use ($'#jumbotron).empty because I want the UV to show below the previous data on temp, humidity, windspeed etc
  var p_uv_current=$("<p> UV Index: " + uv_current + " units </p> ");
  p_uv_current.attr("class", "blockquote")
-
-
-
-
 
 
 
@@ -124,6 +123,7 @@ $.ajax({
           
     var h1_city_current=$(" <h1 id='h1_city_current'>" + city_current + ", "+
     country_current + " </h1> <br> ")
+    h1_city_current.addClass('text-capitalize');
 
     $('#jumbotron').append(h1_city_current)
 
@@ -156,7 +156,7 @@ $.ajax({
 
      console.log(city_current)
 
-    // current UV
+    // current UV- Note that this variable is created on line 94, but appended here, as that is the order you want it to appear
     $("#jumbotron").append(p_uv_current);
 
 
@@ -180,15 +180,15 @@ $.ajax({
 
      for (let i=0;i<5;i++) {
  
-       // Cleaning jumbotrone before dumping new data
+       // Cleaning jumbotrone before pouring in new data
     $("#day"+i).empty();
 
-    //Dumping date into the widget
+    // Pouring date into the widget
     var date_5d_current=$('<p>').text((MM+1)+". "+(dd+i)+". "+yyyy);
      
     $('#day'+i).append(date_5d_current).addClass('font-weight-bold');
 
-    //Dumping icon into 5d forcast widget
+    // Pouring icon into 5d forcast widget
 
      var icon_5d_current=$("<img src='http://openweathermap.org/img/wn/" +
        response.list[i].weather[0].icon +
@@ -197,12 +197,12 @@ $.ajax({
        $('#day'+i).append(icon_5d_current);
 
 
-       // Dumping Temperature into 5d forcast widget
+       // Pouring Temperature into 5d forcast widget
        var temp_5d_current=$('<p>' ).text('Temp: '+response.list[i].main.temp+ " °F")
        $('#day'+i).append(temp_5d_current);
 
-       // Dumping humiditiy in the footer of the card- take not of the change in id
-       $("#hum"+i).empty();
+       // Pouring humiditiy in the footer of the card- take not of the change in id
+       $("#hum"+i).empty(); // imp otherwise the humidity will keep appending
        var humidity_5d_current=response.list[i].main.humidity+' %'
        $('#hum'+i).append(humidity_5d_current)
      
@@ -211,13 +211,14 @@ $.ajax({
    }); // br-cl for ajax request for 5d weather forcast
 
 
-//______________________________________________Note that if the 5 day forcast is outside the br-close ajx for the UV, it does not work as the current_city variable becomes unavailable
+//______________________________________________
+//Note that if the 5 day forcast is outside the br-close ajx for the UV, it does not work as the current_city variable becomes unavailable for the URL
 
 
 
     
 
-  }); //br-close ajax for UV- Note that the UV Ajax is inside the fetch function as well as the success function as it relies on the the longitudinal and lattitudinal variables, secondaly I want the UV to append below the wind speed, note that the APIKey was changed to api_key
+  }); //br-close ajax for UV- Note that the UV Ajax is inside the fetch function as well as the success function as it relies on the the longitudinal and lattitudinal variables which are not accessible outside these functions, secondaly I want the UV to append below the wind speed, note that the APIKey was changed to api_key as api_key is accessible within the same global function, so it is not necessary to create another api key variable for AJAX request
 
   
 
@@ -232,29 +233,16 @@ $.ajax({
 
 
                 function error(){
-                  $('#jumbotron').text('We are unable to retrieve location at this time, you can also type in a city into the search box to get weather information.')
+                  $('#jumbotron').text('We are unable to retrieve location at this time, you can also type in a city into the search box in order to obtain weather information for a specific city around the world.')
                 }
 
 
 }; // br-cl for the outer most get_weather function
     
-  
-
-
-
     
 
 /////////////////////////////////////////////////////
 ///////////////////////////////////////////////////
-
-
-
-
-
-        
-
-
-
 
 // Save the city input by the user and feed that to triger weather request
 
@@ -262,61 +250,53 @@ $.ajax({
      
       // On click- I want to capture the city typed in by the user
 
+      event.preventDefault();
+
       var user_city_text = $("#user_city_text").val();
-      console.log(user_city_text);
 
+      // console.log(user_city_text);
 
-      // Then if a user clicks the new city button, the jumbotron and 5day forcast should display the information for that city button
-      // Then I want run the AJAX request for the city typed in by the user
+      // user_city_text!==cityList[i]
+      cityList.push(user_city_text)
 
+    
 
+      add_usercity_bt();
       search_city_weather(user_city_text);
-      store_city(user_city_text);
-      create_citybutton_list(user_city_text);
-
 
     }); // br-close Jquery on click event
     
 
 
-    function store_city(user_city_text) {
-      // First check if the city is aready added to the local storage
-                        let seen=false
-                        for (let i=0; i<localStorage.length; i++){
-
-                          if (user_city_text===localStorage.getItem(i)){
-                            seen=true;
-                          };// br-close for the if. 
-                        }; // br-close for for loop checking for newentry
-
-                            // If not Then I want to store the city to local storage
-                            if (seen !== true) {
-                              localStorage.setItem(localStorage.length, user_city_text)
-                            }; //closing bracket for  if seen !=true
-                            
-                            // console.log('LocalStorage:',localStorage)
 
 
-                      }; // br-close store_city function
+function add_usercity_bt(){
+  $('#user_city_list').empty();
+    for (var i=0;i<cityList.length;i++){
+      
+        var new_city_button= $(" <br><button>");
 
-// console.log('store city function', store_city(user_city_text));
+        //Inserting the city name inside the button at the time of creation of the button corresponding with the city search query by the  user
+        new_city_button.text(cityList[i])
+
+          new_city_button.addClass('city-bt btn-large btn-warning w-75 blockquote font-weight-bold text-capitalize  ')
+
+          $('#user_city_list').append(new_city_button)
+          // console.log(new_city_button)
+    
+          $(".city-bt").click(function () {
+            //it takes user input and stores it in a var cityName
+            //passed cityName thru render weather
+            console.log("click working for city bt");
+        
+         
+          });
 
 
-   function create_citybutton_list(){
-  
-                        // Then I want to create buttons for the left column for each time a new city is typed for each of the cities typed
-                        $('#user_city_list').empty();
-                        for (var i=0;i<localStorage.length;i++){
-                          var new_city_button= $(`<button>`).text(localStorage.getItem(i))
-                          new_city_button.addClass('btn-large, btn-warning')
-                          $('#user_city_list').append(new_city_button)
-                          // console.log(new_city_button)
-                        } //br-close for the end of user city for loop
-                  
-                      } //br- close create-citybutton_list function
-                        
-                        
-// console.log('create_citybuton_list function', create_citybutton_list(user_city_text))
+      
+    } //br close for
+  } //br-close user city button
+
 
 
 
@@ -367,6 +347,7 @@ $.ajax({
                                 
                           var h1_city_user=$(" <h1 id='h1_city_current'>" + user_city_text + ", "+
                           country_usercity + " </h1> <br> ")
+                          h1_city_user.addClass('text-capitalize')
 
                           $('#jumbotron').append(h1_city_user)
 
@@ -455,12 +436,12 @@ $.ajax({
             // Cleaning jumbotrone before dumping new data
          $("#day"+i).empty();
 
-         //Dumping date into the widget
+         //Pouring date into the widget
          var date_5d=$('<p>').text((MM+1)+". "+(dd+i)+". "+yyyy);
           
          $('#day'+i).append(date_5d).addClass('font-weight-bold');
 
-         //Dumping icon into 5d forcast
+         //Pouring icon into 5d forcast
 
           var icon_5d=$("<img src='http://openweathermap.org/img/wn/" +
             response.list[i].weather[0].icon +
@@ -469,11 +450,12 @@ $.ajax({
             $('#day'+i).append(icon_5d);
 
 
-            // Dumping Temperature into 5d forcast
+            // Pouring Temperature into 5d forcast
             var temp_5d=$('<p>' ).text('Temp: '+response.list[i].main.temp+ " °F")
             $('#day'+i).append(temp_5d);
 
-            // Dumping humiditiy in the footer of the card- take not of the change in id
+            //Pouring humiditiy in the footer of the card- take not of the change in id
+            $("#hum"+i).empty();
             var humidity_5d=response.list[i].main.humidity+' %'
             $('#hum'+i).append(humidity_5d)
           
@@ -481,9 +463,7 @@ $.ajax({
 
         }); // br-cl for ajax request
 
-        
-
-
+  
 
 
     } //outer search_city_weather function
@@ -498,84 +478,3 @@ $.ajax({
     
 
       
-
-      
-
-
-//JUST AJAX FOR 5 day function
-   
-    // function fiveDayForcast(user_city_text) {
-    //   var fiveDayAPIkey = "b5f46b5084bc390631225358108604d4";
-    
-    //   //API URL
-    //   var fiveDayForcastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${user_city_text}&units=imperial&cnt=5&appid=${fiveDayAPIkey}`;
-    
-    //   // 'api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}'
-    //   //ajax request
-    //   $.ajax({
-    //     url: fiveDayForcastURL,
-    //     method: "GET",
-    //   }).then(function (response) {
-    //     console.log('5 day forcast',response);
-    //   }); // br-cl for ajax request
-    // } // br-cl for 5d weather function
-    //============================================
-
-
-
-
-
-    
-
-    // function fiveDayForcast(user_city_text) {
-    //   var fiveDayAPIkey = "b5f46b5084bc390631225358108604d4";
-    
-    //   //API URL
-    //   var fiveDayForcastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${user_city_text}&units=imperial&cnt=5&appid=${fiveDayAPIkey}`;
-    
-    //   // 'api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}'
-    //   //ajax request
-    //   $.ajax({
-    //     url: fiveDayForcastURL,
-    //     method: "GET",
-    //   }).then(function (response) {
-    //     console.log('5 day forcast',response);
-    
-    //     // for (let i = 0; i < 5; i++) {
-    //     //   //empty out the days
-    //     //   $("#day-" + i).empty();
-    //     //   //get date
-        //   var date = new Date();
-        //   var fullDate =
-        //     date.getMonth() +
-        //     1 +
-        //     "/" +
-        //     (date.getDate() + i + 1) +
-        //     "/" +
-        //     date.getFullYear();
-        //   // print date
-        //   $("#day-" + i).text(fullDate);
-        //   //pull the icon
-        //   var iconFore = $(
-        //     "<img src='http://openweathermap.org/img/wn/" +
-        //       response.list[i].weather[0].icon +
-        //       ".png' style='margin-left:10px;'/>"
-        //   );
-        //   // add the icon to the page
-        //   $("#day-" + i).append(iconFore);
-        //   // pull the temp
-        //   var tempFore = $("<p>").text(
-        //     "Tempurature:\n" + response.list[i].main.temp + "°F"
-        //   );
-        //   // add the temp to the page
-        //   $("#day-" + i).append(tempFore);
-        //   // pull the humidity
-        //   var humFore = $("<p>").text(
-        //     "Humidity:\n" + response.list[i].main.humidity + "%"
-        //   );
-        //   // add the humidity to the page
-        //   $("#day-" + i).append(humFore);
-    //     // } // br-cl for  for loop
-    //   }); // br-cl for ajax request
-    // } // br-cl for 5d weather function
-    
