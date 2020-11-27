@@ -288,7 +288,9 @@ function add_usercity_bt(){
             //it takes user input and stores it in a var cityName
             //passed cityName thru render weather
             console.log("click working for city bt");
+            cityName = $(this).text();
         
+            search_city_weather(cityName);
          
           });
 
