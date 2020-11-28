@@ -1,8 +1,18 @@
 
+var colorLow = "#B5EAD7";
+var colorMid = "#E2F0CB";
+var colorHigh = "#FFDAC1";
+var colorVeryHigh = "#FFB7B2";
+var colorExtreme = "#FF9AA2";
+
+
+
+
 
 //?Ben Is there a way around not haveing the prompt for
 // How to get rid of extra space around the footer/ margin
 // Suggestions regarding more accurate moble responsive design 
+// Is it possible to control the order in which the items can get appended
 
 
 
@@ -86,12 +96,33 @@ $.ajax({
 }).then(function (response) {
  console.log('UV RESPONSE',response);
  // console.log(response.value);
- var uv_current = response.value;
+ var uv_current = parseFloat(response.value).toFixed(2);
 
 
 // UserSearch driven Wind speed- Note that I did not want to use ($'#jumbotron).empty because I want the UV to show below the previous data on temp, humidity, windspeed etc
- var p_uv_current=$("<p> UV Index: " + uv_current + " units </p> ");
+// <p class="info"> UV Index: <span id="currentUV"></span> </p>
+
+ var p_uv_current=$("<p> UV Index: <span id='uv' class='text-white'>" + uv_current + "</span> units </p> ");
  p_uv_current.attr("class", "blockquote")
+
+ // Note that p_uv_current has not been appended yet so I cannot use jquery here to target "#uv"
+
+ console.log('uv_current',uv_current)
+
+ //Sample useful Jquery code
+//Try 2---------------
+//  if (uv_current<10){
+  // $( "#jumbotron" ).find( "#uv" ).css( "background-color", "red" );
+// -----------------------
+
+
+//Try 3---------------------------------------
+//  $('#jumbotron').children().addClass('text-warning')
+// }
+//-----------------------------------
+
+//  uv_color(uv_current)
+//  console.log ( "uv color",uv_color(uv_current))
 
 
 
@@ -158,6 +189,16 @@ $.ajax({
 
     // current UV- Note that this variable is created on line 94, but appended here, as that is the order you want it to appear
     $("#jumbotron").append(p_uv_current);
+
+    // Note that I can access the id #uv now, AFTER the p_uv_current is appended into the dom
+
+      if (uv_current<10){
+      $('#uv').addClass('text-danger');
+      
+  }
+  
+
+  
 
 
     
@@ -402,7 +443,7 @@ function add_usercity_bt(){
        
 
    // UserSearch driven Wind speed- Note that I did not want to use ($'#jumbotron).empty
-          var p_uv=$("<p id='p_wind_current'> UV Index: " + uv + " units </p> ");
+          var p_uv=$("<p > UV Index: <span  id='p_uv_current'" + uv + " units </p> ");
           p_uv.attr("class", "blockquote")
           $("#jumbotron").append(p_uv);
 
