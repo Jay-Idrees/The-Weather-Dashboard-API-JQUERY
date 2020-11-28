@@ -192,11 +192,6 @@ $.ajax({
 
     // Note that I can access the id #uv now, AFTER the p_uv_current is appended into the dom
 
-      if (uv_current<10){
-      $('#uv').addClass('text-danger');
-      
-  }
-  
 
   
 
@@ -259,7 +254,7 @@ $.ajax({
 
     
 
-  }); //br-close ajax for UV- Note that the UV Ajax is inside the fetch function as well as the success function as it relies on the the longitudinal and lattitudinal variables which are not accessible outside these functions, secondaly I want the UV to append below the wind speed, note that the APIKey was changed to api_key as api_key is accessible within the same global function, so it is not necessary to create another api key variable for AJAX request
+  }); //br-close ajax for UV- Note that the UV Ajax is inside the fetch function as well as the success function as it relies on the the longitudinal and lattitudinal variables which are not accessible outside these functions, secondly I want the UV to append below the wind speed, note that the APIKey was changed to api_key as api_key is accessible within the same global function, so it is not necessary to create another api key variable for AJAX request
 
   
 
@@ -280,7 +275,22 @@ $.ajax({
 
 }; // br-cl for the outer most get_weather function
     
-    
+color_uv(uv_current)
+
+function color_uv(uv){
+  if (uv<=3){
+    // Note that JQuery addClass attribute is synonomus with class='xyz' and the .css is synonomus to style='font-weight: bold' - notice the use of curley brackets inside css {}
+  $('#uv').addClass('text-white bg-success').css({'font-weight': 'bold', 'border-radius': '20px', 'padding':'4px'});
+  
+}else if (uv>3){
+$('#uv').addClass('text-white bg-warning');
+} else if (uv>=8){
+$('#uv').addClass('text-white bg-danger');
+} // br end of else if
+
+}// be close uv_color function
+
+  
 
 /////////////////////////////////////////////////////
 ///////////////////////////////////////////////////
