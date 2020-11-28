@@ -344,7 +344,10 @@ function color_uv(uv){
 
 function create_usercity_bt(){
   // $('#user_city_list').empty();
+  var localstorage_city_list = JSON.parse(localStorage.getItem("localstorage_city_list"));
 
+  console.log ('local city list',localstorage_city_list)
+   
   
   
   if (localstorage_city_list) {
