@@ -1,13 +1,4 @@
 
-var colorLow = "#B5EAD7";
-var colorMid = "#E2F0CB";
-var colorHigh = "#FFDAC1";
-var colorVeryHigh = "#FFB7B2";
-var colorExtreme = "#FF9AA2";
-
-
-
-
 
 //?Ben Is there a way around not haveing the prompt for
 // How to get rid of extra space around the footer/ margin
@@ -16,7 +7,11 @@ var colorExtreme = "#FF9AA2";
 
 
 
-   var cityList=[]
+
+   var search_city_list=[]
+
+   create_usercity_bt();
+
 
 // Creating global variables for the DATE
 
@@ -35,7 +30,7 @@ var colorExtreme = "#FF9AA2";
    
    var d = new Date();
    var day = weekday[d.getDay()];
-   console.log(day)
+  //  console.log(day)
 
 
 var date_raw = new Date();
@@ -45,7 +40,7 @@ var yyyy = date_raw.getFullYear(); //yields year
 var date_now=(MM+1)+". "+dd+". "+yyyy;
 var day_date='Today is '+day+', '+date_now;
 
-console.log(date_now, date_raw, day_date)
+// console.log(date_now, date_raw, day_date)
 
     //  // Alternative 2- Today's date
     //  var date2 = (new Date()).toISOString().split('T')[0];
@@ -81,7 +76,7 @@ function get_weather(){
  fetch(query_url_loc)
  .then(response => response.json())
  .then(data => {
-   console.log(data);
+  //  console.log(data);
 
 
    // Obtaining the UV intensity metric- to be filled
@@ -94,8 +89,9 @@ $.ajax({
  url: uvURL,
  method: "GET",
 }).then(function (response) {
- console.log('UV RESPONSE',response);
+//  console.log('UV RESPONSE',response);
  // console.log(response.value);
+ // converting the uv index value to decimal up to2 decimal places
  var uv_current = parseFloat(response.value).toFixed(2);
 
 
@@ -107,7 +103,7 @@ $.ajax({
 
  // Note that p_uv_current has not been appended yet so I cannot use jquery here to target "#uv"
 
- console.log('uv_current',uv_current)
+//  console.log('uv_current',uv_current)
 
  //Sample useful Jquery code
 //Try 2---------------
@@ -136,6 +132,7 @@ $.ajax({
   var humidity_current=data.main.humidity
   var wind_current=data.wind.speed
   // console.log(' CURRENT temp humidity wind city:' ,temp_current, humidity_current, wind_current, city_current)
+
   // Obtain weather depiction icon
   var icon_current = $(
     "<img src='http://openweathermap.org/img/wn/" +
@@ -185,7 +182,7 @@ $.ajax({
      p_wind_current.attr("class", "blockquote")
      $("#jumbotron").append(p_wind_current);
 
-     console.log(city_current)
+    //  console.log(city_current)
 
     // current UV- Note that this variable is created on line 94, but appended here, as that is the order you want it to appear
     $("#jumbotron").append(p_uv_current);
@@ -203,7 +200,7 @@ $.ajax({
 
 // Obtaining the 5 day current city forcast and displaying the data ====
    //API URL
-   console.log(city_current)
+  //  console.log(city_current)
 
    var fiveDayForcastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city_current}&units=imperial&cnt=5&appid=${api_key}`;
       
@@ -213,7 +210,7 @@ $.ajax({
      url: fiveDayForcastURL,
      method: "GET",
    }).then(function (response) {
-     console.log('5 day forcast',response);
+    //  console.log('5 day forcast',response);
 
 
      for (let i=0;i<5;i++) {
@@ -278,6 +275,13 @@ $.ajax({
 }; // br-cl for the outer most get_weather function
     
 
+
+
+
+
+
+
+
 // Color_uv takes in the value of uv as argument and changes the color properties of the text-background in the green, yellow or red for mild moderate and severe severity
 function color_uv(uv){
   if (uv<=3){
@@ -302,9 +306,9 @@ function color_uv(uv){
 /////////////////////////////////////////////////////
 ///////////////////////////////////////////////////
 
-// Save the city input by the user and feed that to triger weather request
+// PUSHING search city into the array search_city_list
 
-    $('#user_citysearch_bt').click(function () {
+    $('#user_citysearch_bt').click(function (event) {
      
       // On click- I want to capture the city typed in by the user
 
@@ -314,48 +318,71 @@ function color_uv(uv){
 
       // console.log(user_city_text);
 
-      // user_city_text!==cityList[i]
-      cityList.push(user_city_text)
+      search_city_list.push(user_city_text)
+      
+      console.log('city list', search_city_list)
 
+      var new_city_button= $(" <br><button>");
+
+      new_city_button.text(user_city_text)
+
+      new_city_button.addClass('city-bt btn-large btn-warning w-75 blockquote font-weight-bold text-capitalize').css({'border-radius':'10px'})
+
+      $('#user_city_list').append(new_city_button)
+
+      localStorage.setItem("localstorage_city_list", JSON.stringify(search_city_list));
+      console.log ("local storage", localStorage)
     
 
-      add_usercity_bt();
       search_city_weather(user_city_text);
 
+     
     }); // br-close Jquery on click event
     
+ 
 
 
+function create_usercity_bt(){
+  // $('#user_city_list').empty();
 
-
-function add_usercity_bt(){
-  $('#user_city_list').empty();
-    for (var i=0;i<cityList.length;i++){
+  
+  
+  if (localstorage_city_list) {
+  for (var i=0;i<localstorage_city_list.length;i++){
       
         var new_city_button= $(" <br><button>");
 
         //Inserting the city name inside the button at the time of creation of the button corresponding with the city search query by the  user
-        new_city_button.text(cityList[i])
+        // Place the current citty in cityList array as text inside the button
+        new_city_button.text(localstorage_city_list[i])
 
-          new_city_button.addClass('city-bt btn-large btn-warning w-75 blockquote font-weight-bold text-capitalize  ')
+          new_city_button.addClass('city-bt btn-large btn-warning w-75 blockquote font-weight-bold text-capitalize  ').css({'border-radius':'10px'})
 
           $('#user_city_list').append(new_city_button)
           // console.log(new_city_button)
-    
-          $(".city-bt").click(function () {
-            //it takes user input and stores it in a var cityName
-            //passed cityName thru render weather
-            console.log("click working for city bt");
-            cityName = $(this).text();
-        
-            search_city_weather(cityName);
-         
-          });
 
-
-      
-    } //br close for
+          
+  // Clicking the indiviual city button trigers the weather AJAX request for that particular city. Note that this needs to be inside the create_usercity_bt function otherwise it will not functionality for all buttons in the search list, and only for the current one
+                    $(".city-bt").click(function () {
+                      //it takes user input and stores it in a var cityName
+                      //passed cityName thru render weather
+                      console.log("click working for city bt");
+                      city_bt_text = $(this).text();
+                      console.log('Button text', city_bt_text)
+                      search_city_weather(city_bt_text);
+                  
+                    }); // br close city button click
+                        
+    } //br close for loop
   } //br-close user city button
+
+}// br close if statement
+  
+  
+
+
+
+
 
 
 
@@ -381,7 +408,7 @@ function add_usercity_bt(){
         url: queryURL,
         method: "GET",
       }).then(function (response) {
-        console.log(response)
+        // console.log(response)
 
 
         // Variables for the Jumbotron based on user search city
@@ -396,7 +423,7 @@ function add_usercity_bt(){
         var icon_usercity = $("<img src='http://openweathermap.org/img/wn/" +
             response.weather[0].icon + ".png' style='margin-left:20px;'/>");
 
-       console.log(' USER CITY temp humidity wind city:', city_user,country_usercity, temp_usercity,  humidity_usercity, wind_usercity, icon_usercity, )
+      //  console.log(' USER CITY temp humidity wind city:', city_user,country_usercity, temp_usercity,  humidity_usercity, wind_usercity, icon_usercity, )
       
 
    // Usersearch driven city data into jumbodron
@@ -454,12 +481,12 @@ function add_usercity_bt(){
           url: uvURL,
           method: "GET",
         }).then(function (response) {
-          console.log('UV RESPONSE',response);
+          // console.log('UV RESPONSE',response);
           // console.log(response.value);
           var uv = response.value;
        
 
-   // UserSearch driven Wind speed- Note that I did not want to use ($'#jumbotron).empty
+   // UserSearch driven city UV- Note that I did not want to use ($'#jumbotron).empty
    var p_uv=$("<p> UV Index: <span id='uv' class='text-white'>" + uv + "</span> units </p> ");
     
           p_uv.attr("class", "blockquote")
@@ -490,7 +517,7 @@ function add_usercity_bt(){
           url: fiveDayForcastURL,
           method: "GET",
         }).then(function (response) {
-          console.log('5 day forcast',response);
+          // console.log('5 day forcast',response);
 
 
           for (let i=0;i<5;i++) {
