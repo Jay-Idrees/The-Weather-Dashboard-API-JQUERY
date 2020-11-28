@@ -190,7 +190,9 @@ $.ajax({
     // current UV- Note that this variable is created on line 94, but appended here, as that is the order you want it to appear
     $("#jumbotron").append(p_uv_current);
 
-    // Note that I can access the id #uv now, AFTER the p_uv_current is appended into the dom
+    // Note that I can access the id #uv now, AFTER the p_uv_current is appended into the dom- I am going to do that by calling in the color_uv function and will pass on the uv_current as argument which contains the numerical value of uv index. Based on this value the appropriate color is selected (green, low risk, yellow-medium risk, red-high risk) 
+
+    color_uv(uv_current)
 
 
   
@@ -275,7 +277,7 @@ $.ajax({
 
 }; // br-cl for the outer most get_weather function
     
-color_uv(uv_current)
+
 
 function color_uv(uv){
   if (uv<=3){
