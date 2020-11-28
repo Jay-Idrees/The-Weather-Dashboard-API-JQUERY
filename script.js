@@ -282,13 +282,18 @@ $.ajax({
 function color_uv(uv){
   if (uv<=3){
     // Note that JQuery addClass attribute is synonomus with class='xyz' and the .css is synonomus to style='font-weight: bold' - notice the use of curley brackets inside css {}
-  $('#uv').addClass('text-white bg-success').css({'font-weight': 'bold', 'border-radius': '20px', 'padding':'4px'});
-  
-}else if (uv>3){
-$('#uv').addClass('text-white bg-warning');
-} else if (uv>=8){
-$('#uv').addClass('text-white bg-danger');
-} // br end of else if
+
+    // Case for mild- Green
+      $('#uv').addClass('text-white bg-success').css({'font-weight': 'bold', 'border-radius': '15px', 'padding':'4px', 'opacity':'0.7'});
+    
+    // Case for moderate-Yellow
+      }else if (uv>3){
+      $('#uv').addClass('text-white bg-warning').css({'font-weight': 'bold', 'border-radius': '15px', 'padding':'4px' , 'opacity':'0.7'});
+
+   // Case for severe-Red
+      } else if (uv>=8){
+      $('#uv').addClass('text-white bg-danger').css({'font-weight': 'bold', 'border-radius': '15px', 'padding':'4px' , 'opacity':'0.7'});
+      } // br end of else if
 
 }// be close uv_color function
 
