@@ -278,7 +278,7 @@ $.ajax({
 }; // br-cl for the outer most get_weather function
     
 
-
+// Color_uv takes in the value of uv as argument and changes the color properties of the text-background in the green, yellow or red for mild moderate and severe severity
 function color_uv(uv){
   if (uv<=3){
     // Note that JQuery addClass attribute is synonomus with class='xyz' and the .css is synonomus to style='font-weight: bold' - notice the use of curley brackets inside css {}
@@ -455,10 +455,12 @@ function add_usercity_bt(){
        
 
    // UserSearch driven Wind speed- Note that I did not want to use ($'#jumbotron).empty
-          var p_uv=$("<p > UV Index: <span  id='p_uv_current'" + uv + " units </p> ");
+   var p_uv=$("<p> UV Index: <span id='uv' class='text-white'>" + uv + "</span> units </p> ");
+    
           p_uv.attr("class", "blockquote")
           $("#jumbotron").append(p_uv);
 
+          color_uv(uv)
 
 
  
