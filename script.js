@@ -318,6 +318,7 @@ function color_uv(uv){
 
       // console.log(user_city_text);
 
+      // Note here I am using search_city_list- the master array, in order to push the new city text entered by the user
       search_city_list.push(user_city_text)
       
       console.log('city list', search_city_list)
@@ -329,6 +330,8 @@ function color_uv(uv){
       new_city_button.addClass('city-bt btn-large btn-warning w-75 blockquote font-weight-bold text-capitalize').css({'border-radius':'10px'})
 
       $('#user_city_list').append(new_city_button)
+
+      // Note that it is important to update the local storage at this point as the latest city has been pushed into the search_city_array- this is where a copy of the updated list is stored into the local storage and stored in the form of a new varaible called localstorage_city_list. This is different because it can be stored on the user's harddrive and retrieved later when the user re-visits the page. Alternatively if I use search_city_list it is only available when the javacode is run- it is not stored locally and disappears when the user closes the webpage. But if a copy is stored in local storage then it can be retrieved
 
       localStorage.setItem("localstorage_city_list", JSON.stringify(search_city_list));
       console.log ("local storage", localStorage)
@@ -344,6 +347,9 @@ function color_uv(uv){
 
 function create_usercity_bt(){
   // $('#user_city_list').empty();
+
+  // Note that it is important to pull city_list from local storage  before the loaclstorage_city_list variable can be used by the for loop below
+
   var localstorage_city_list = JSON.parse(localStorage.getItem("localstorage_city_list"));
 
   console.log ('local city list',localstorage_city_list)
@@ -351,6 +357,9 @@ function create_usercity_bt(){
   
   
   if (localstorage_city_list) {
+    // note that here I am using localstorage_city_list instead of the master search_city_list array that is updated when the search button is clicked. You will notice that local_storage_city_list is actually a copy of search_city_list which was created when the search_city_list is stored into the local storage.
+
+    // The advantage of using localstorage_city_list instead of the original search_city_list is that it can automatically create new city buttons using the search_city_list/local_storage_city_list when a user revisits the page
   for (var i=0;i<localstorage_city_list.length;i++){
       
         var new_city_button= $(" <br><button>");
