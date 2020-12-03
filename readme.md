@@ -76,7 +76,7 @@ This project demonstrates command over the following programing skills:
 
 - Capturing the text typed by the user about city name using JQUERY click events
 
-- Dynamically creating city buttons based on user search history
+- Dynamically creating city buttons using JQUERY based on user search history and local storage
 
 - Using local storage to store history of the cities searched by the user
 
