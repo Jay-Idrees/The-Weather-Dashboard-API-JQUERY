@@ -5,7 +5,7 @@ This project consists of a weather application. The app contains functionality o
  
 
 [Link to the Weather Dashboard](https://jidrees.github.io/The-Weather-Dashboard-API-JQUERY/) <br />
-[Video Demo]()<br />
+[Video Demo](https://youtu.be/EtWswL3q2fw)<br />
 
 ## Contact Programmer for questions
 
