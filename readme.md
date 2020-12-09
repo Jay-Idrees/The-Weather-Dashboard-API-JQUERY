@@ -1,17 +1,17 @@
 # The Weather Dashboard
 
 ## About the Project
-This project consists of a weather application. The app contains functionality of generating API requests to a publically available API. For this app, I have used the API from Open Weather map (https://openweathermap.org/api). The goal is to display weather data for the current day as well as to obtain a 5 day forcast. The app also has the functionality for allowing the user to obtain weather information by searching for a specific city.
+This project consists of a weather application. The app contains functionality of generating API requests to a publically available API. For this app, I have used the API from Open Weather map (https://openweathermap.org/api). The app displays weather data for the current day and provides a 5 day forcast. The user can type in a city into a search text box to trigger an API request for that particular city. The app also provides infomation to the user regarding the severity of UV index by automatically coloring it as green, yellow, red based on the severity. In addition the app also stores user search history and and automatically displays it using local storage whenever the user re-visits the page
  
 
-[Link to the Weather Dashboard](https://jidrees.github.io/The-Weather-Dashboard-API-JQUERY/) <br />
+[Link to the Weather Dashboard](https://jay-idrees.github.io/The-Weather-Dashboard-API-JQUERY/) <br />
 [Video Demo](https://youtu.be/EtWswL3q2fw)<br />
 
 ## Contact Programmer for questions
 
 Jay J. Idrees, MD, MPH<br />
 Full-Stack Software Engineer<br />
-[JIDREES](https://github.com/jidrees) ![Github](http://img.shields.io/badge/github-black?style=flat&logo=github)<br />
+[JAY-IDREES](https://github.com/jidrees) ![Github](http://img.shields.io/badge/github-black?style=flat&logo=github)<br />
 jidrees@live.com
 
 
@@ -56,37 +56,39 @@ There are no required packages for this app
 
 ## Applied Programming Skills
 
-This project demonstrates command over the following programing skills: 
+By completing this project I was able to master application of the following programming skills: 
 
-- Retrieving data from a server using an API by generaing AJAX request using JQUERY
+- Making AJAX API requests using JQUERY to fetch data and then displaying on HTML
 
 - Using the Fetch request for geo-location navigation function to obtain user's current location
 
-- Generating AJAX request for API based on the current user location
+- Capturing a user's longitude and lattitude into variables and then Generating AJAX request for API based on the current user location
 
 - Displaying AJAX request data response into the Jumbotron for temperature, humidity, UV index etc
 
-- Utilizing content delivery network (CDN) links in HTML files
+- Linking content delivery network (CDN) links in HTML files
 
-- Using JQUERY to customise uv index color automatically based on mild moderate and severe categories
+- Using JQUERY to customize uv index color (green, yellow, red) automatically based on mild, moderate and severe categories
 
 - Getting current day and date 
 
 - Using the flex-box bootstrap grid technology to develope nested rows and columns for creating widgets
 
-- Capturing the text typed by the user about city name using JQUERY click events
+- Capturing the city name as a value in a textbox typed by the user and then capturing it into a variable using JQUERY click events for triggering API requests
 
 - Dynamically creating city buttons using JQUERY based on user search history and local storage
 
 - Using local storage to store history of the cities searched by the user
 
-- Generating Multiple AJAX requests for current day's weather, 5 day forecast when a user clicks on a previosly searched city button.   
+- Applying JSON Parsing to pull data from local storage and JSON stringigy to store data into local storage
 
-- Generating UV index data via AJAX requests based on longitude and lattitude for the city selected by the user
+- Generating Multiple AJAX requests for current day's weather, 5 day forecast and UV index, when a user clicks on a previosly searched city button.   
+
+- Generating UV index data via AJAX requests, based on longitude and lattitude for the city selected by the user
 
 - Retrieving weather icons from the AJAX request response and displaying them into Jumbotron and weather widgets
 
-- Pairing id names for the the weather widgets (5 day forcast) with the AJAX response variables so that the correct information is displayed for the current date.
+- Pairing unique ids for the the weather widgets (5 day forcast) with the id variable in AJAX response so that the correct information is displayed for the current date.
 
 - Using Node.JS to generate a high quality readme file. 
 
