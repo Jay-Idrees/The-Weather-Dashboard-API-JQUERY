@@ -9,10 +9,11 @@ This project consists of a weather application. The app contains functionality o
 
 ## Contact Programmer for questions
 
-Jay J. Idrees, MD, MPH<br />
+Jay J. Idrees, M.D., M.P.H., S.Eng., C.E.H <br />
 Full-Stack Software Engineer<br />
-[JAY-IDREES](https://github.com/jidrees) ![Github](http://img.shields.io/badge/github-black?style=flat&logo=github)<br />
-jidrees@live.com
+[Jay-Idrees](https://github.com/Jay-Idrees) ![Github](http://img.shields.io/badge/github-black?style=flat&logo=github)<br />
+
+E-mail: Dr.Idrees@MedicalMarijuana.Expert
 
 
 
